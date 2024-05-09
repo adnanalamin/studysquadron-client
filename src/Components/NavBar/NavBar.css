@@ -1,0 +1,5 @@
+#nav a.active {
+  background-color: transparent;
+  border-bottom: 1px red solid;
+  border-radius: none;
+}
