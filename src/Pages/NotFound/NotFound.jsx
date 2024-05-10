@@ -15,7 +15,7 @@ const NotFound = () => {
               </p>
 
               <Link to="/">
-                <button className="px-6 mt-8 inline py-4 rounded-lg font-bold text-lg font-inter shadow text-white  bg-blue-600">
+                <button className="px-6 mt-8 inline py-4 rounded-lg font-bold text-lg font-inter shadow text-white  bg-[#55DB90]">
                   Back to Home
                 </button>
               </Link>
