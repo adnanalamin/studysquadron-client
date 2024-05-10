@@ -1,13 +1,32 @@
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./NavBar.css";
 import { IoMoon, IoSunny } from "react-icons/io5";
 import { CiLogin } from "react-icons/ci";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
+import { ToastContainer, toast } from "react-toastify";
 
 const NavBar = () => {
   const [scrolling, setScrolling] = useState(false);
   const [dark, setDark] = useState(false);
+  const {user, userLogout} = useContext(AuthContext)
+
+  const handelLogout = () => {
+    userLogout()
+    .then(() => {
+      toast.success('Logout Successfull', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+    })
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -88,17 +107,31 @@ const NavBar = () => {
           <ul className="menu menu-horizontal px-1">{navItems}</ul>
         </div>
         <div className="navbar-end">
-          <button
+        <button
             onClick={() => darkModeHandler()}
             className="md:mr-2 w-10 h-10"
           >
             {dark && <IoSunny className="w-6 h-6"></IoSunny>}
             {!dark && <IoMoon className="w-6 h-6"></IoMoon>}
           </button>
+          {user ? <>
+            <div className="dropdown dropdown-end">
+            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+              <div className="w-10 rounded-full">
+                <img alt="Tailwind CSS Navbar component" src={user.photoURL} />
+              </div>
+            </div>
+            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-[#003C43] rounded-box w-52">
+              
+              <li><a>Attempted Assignments</a></li>
+              <li><a onClick={handelLogout}>Logout</a></li>
+            </ul>
+          </div>
+          </> : <>
           <Link to="/login">
             <button
               type="button"
-              className="text-white bg-[#3b5998] hover:bg-[#3b5998]/90 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#3b5998]/55 me-2 mb-2"
+              className="text-white bg-[#003C43] hover:bg-[#135D66]/90 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#3b5998]/55 me-2 mb-2"
             >
               <CiLogin className="w-4 h-4 me-2"></CiLogin>
               Log In
@@ -107,12 +140,17 @@ const NavBar = () => {
           <Link to="/register">
             <button
               type="button"
-              className="text-white bg-[#3b5998] hover:bg-[#3b5998]/90 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#3b5998]/55 me-2 mb-2"
+              className="text-white bg-[#003C43] hover:bg-[#135D66]/90 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#3b5998]/55 me-2 mb-2"
             >
               <CiLogin className="w-4 h-4 me-2"></CiLogin>
               Register
             </button>
           </Link>
+          </>}
+        
+          <ToastContainer />
+
+          
         </div>
       </div>
     </div>

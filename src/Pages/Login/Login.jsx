@@ -3,7 +3,7 @@ import { FaGithub } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { FaRegEye } from "react-icons/fa";
-
+import { useForm } from "react-hook-form"
 import loginImg from "../../assets/images/login.jpg"
 import { Link } from "react-router-dom";
 
@@ -11,13 +11,15 @@ import { Link } from "react-router-dom";
 
 
 const Login = () => {
+  const { login, formState: { errors }, handleSubmit } = useForm()
+  const onSubmit = (data) => console.log(data)
     return (
         <div className="pt-14">
             <div className="font-[sans-serif] text-[#333]">
       <div className="min-h-screen flex flex-col items-center justify-center">
         <div className="grid md:grid-cols-2 items-center gap-4 max-w-6xl w-full p-4 m-4 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-md">
           <div className="md:max-w-md w-full sm:px-6 py-4">
-            <form>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <div className="mb-12">
                 <h3 className="text-3xl font-extrabold">Log in</h3>
                 <p className="text-sm mt-4 ">Don not have an account <Link to='/register'><span className="text-blue-600 font-semibold hover:underline ml-1 whitespace-nowrap">Register here</span></Link></p>
@@ -25,17 +27,33 @@ const Login = () => {
               <div>
                 <label className="text-xs block mb-2">Email</label>
                 <div className="relative flex items-center">
-                  <input name="email" type="text" required className="w-full text-sm border-b border-gray-300 focus:border-[#333] px-2 py-3 outline-none" placeholder="Enter email" />
+                  <input
+                  {...login("email", {
+                    required: true,
+                    pattern: /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,
+                  })}
+                  aria-invalid={errors.email ? "true" : "false"}
+                   name="email" type="text" required className="w-full text-sm border-b border-gray-300 focus:border-[#333] px-2 py-3 outline-none" placeholder="Enter email" />
                   <MdEmail className="w-[18px] h-[18px] absolute right-2"></MdEmail>
                   
                 </div>
+                {errors.email?.type === "required" && (
+                  <p role="alert">E-mail is required</p>
+                )}
               </div>
               <div className="mt-8">
                 <label className="text-xs block mb-2">Password</label>
                 <div className="relative flex items-center">
-                  <input name="password" type="password" required className="w-full text-sm border-b border-gray-300 focus:border-[#333] px-2 py-3 outline-none" placeholder="Enter password" />
+                  <input
+                  {...login("password", {
+                    required: true,
+                    pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/,
+                  })}
+                  aria-invalid={errors.password ? "true" : "false"}
+                   name="password" type="password" required className="w-full text-sm border-b border-gray-300 focus:border-[#333] px-2 py-3 outline-none" placeholder="Enter password" />
                   <FaRegEye  className="w-[18px] h-[18px] absolute right-2"></FaRegEye>
                 </div>
+                {errors.password && <p role="alert"> at least 1 uppercase letter, 1 lowercase letter and 1 number</p>}
               </div>
               
               <div className="mt-12">

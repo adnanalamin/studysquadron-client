@@ -4,7 +4,7 @@ import { FaSquareTwitter } from "react-icons/fa6";
 
 const Footer = () => {
   return (
-    <div className="dark:bg-[#1A1D2B] bg-[#003C43]">
+    <div className="dark:bg-[#1A1D2B] bg-[#003C43] mt-8">
       <footer className="dark:bg-[#1A1D2B] bg-[#003C43] lg:max-w-6xl mx-auto">
         <div className="container mx-auto p-0 md:p-8 xl:px-0">
           <div className="mx-auto max-w-7xl px-6 pb-10 pt-16">
