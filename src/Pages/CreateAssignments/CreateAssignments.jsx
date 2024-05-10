@@ -10,7 +10,7 @@ const CreateAssignments = () => {
         <div className="container mx-auto my-4 px-4 lg:px-20 ">
           <div className="bg-[#135D66] dark:bg-[#222831] p-8 my-4 md:px-12 w-full lg:pl-20 lg:pr-40 mr-auto rounded-2xl shadow-2xl">
             <div className="flex">
-              <h1 className="font-bold uppercase text-5xl dark:text-white">
+              <h1 className="font-bold uppercase text-5xl text-[#77B0AA] dark:text-white">
                 Create assignment
               </h1>
             </div>
