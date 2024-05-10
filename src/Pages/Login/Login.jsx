@@ -6,13 +6,23 @@ import { FaRegEye } from "react-icons/fa";
 import { useForm } from "react-hook-form"
 import loginImg from "../../assets/images/login.jpg"
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
+import toast, { Toaster } from 'react-hot-toast';
 
 
 
 
 const Login = () => {
-  const { login, formState: { errors }, handleSubmit } = useForm()
-  const onSubmit = (data) => console.log(data)
+  const { register, formState: { errors }, handleSubmit } = useForm()
+  const {userSignIn} = useContext(AuthContext)
+  const onSubmit = (data) => {
+    const {email, password} = data;
+    userSignIn(email, password)
+    .then(() => {
+      toast.success('LogIn Successfull')
+    })
+  }
     return (
         <div className="pt-14">
             <div className="font-[sans-serif] text-[#333]">
@@ -28,7 +38,7 @@ const Login = () => {
                 <label className="text-xs block mb-2">Email</label>
                 <div className="relative flex items-center">
                   <input
-                  {...login("email", {
+                  {...register("email", {
                     required: true,
                     pattern: /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,
                   })}
@@ -45,7 +55,7 @@ const Login = () => {
                 <label className="text-xs block mb-2">Password</label>
                 <div className="relative flex items-center">
                   <input
-                  {...login("password", {
+                  {...register("password", {
                     required: true,
                     pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/,
                   })}
@@ -57,7 +67,7 @@ const Login = () => {
               </div>
               
               <div className="mt-12">
-                <button type="button" className="w-full shadow-xl py-2.5 px-4 text-sm font-semibold rounded-full text-white bg-[#135D66] hover:bg-[#003C43] focus:outline-none">
+                <button  className="btn w-full shadow-xl py-2.5 px-4 text-sm font-semibold rounded-full text-white bg-[#135D66] hover:bg-[#003C43] focus:outline-none">
                   Log in
                 </button>
               </div>
@@ -84,6 +94,10 @@ const Login = () => {
         </div>
       </div>
     </div>
+    <Toaster
+  position="top-right"
+  reverseOrder={true}
+/>
         </div>
     );
 };
