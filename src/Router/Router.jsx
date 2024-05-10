@@ -6,6 +6,7 @@ import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import CreateAssignments from "../Pages/CreateAssignments/CreateAssignments";
 import PrivetRouter from "./PrivetRouter";
+import Assignments from "../Pages/Assignments/Assignments";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: '/CreateAssignments',
         element: <PrivetRouter><CreateAssignments></CreateAssignments></PrivetRouter>
+      },
+      {
+        path: '/assignments',
+        element: <Assignments></Assignments>
       }
     ],
   },

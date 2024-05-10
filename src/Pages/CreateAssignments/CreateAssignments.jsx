@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 const CreateAssignments = () => {
   const [dueDate, setDueDate] = useState(new Date());
   const [difficultyLevel, setDifficultyLevel] = useState();
   const [errors, setErrors] = useState({});
+  const { user } = useContext(AuthContext);
 
   const handelDifficultyChange = (e) => {
     setDifficultyLevel(e.target.value);
@@ -17,6 +19,8 @@ const CreateAssignments = () => {
     const marks = e.target.marks.value;
     const description = e.target.description.value;
     const thumbnailimage = e.target.thumbnailimage.value;
+    const email = user.email;
+    const userName = user.displayName;
 
     if (
       !title ||
@@ -36,6 +40,8 @@ const CreateAssignments = () => {
       thumbnailimage,
       dueDate,
       difficultyLevel,
+      email,
+      userName,
     };
     console.log(assignment);
     setErrors({});
