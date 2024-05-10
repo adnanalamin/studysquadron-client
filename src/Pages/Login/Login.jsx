@@ -5,7 +5,7 @@ import { MdEmail } from "react-icons/md";
 import { FaRegEye } from "react-icons/fa";
 import { useForm } from "react-hook-form"
 import loginImg from "../../assets/images/login.jpg"
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import toast, { Toaster } from 'react-hot-toast';
@@ -16,11 +16,16 @@ import toast, { Toaster } from 'react-hot-toast';
 const Login = () => {
   const { register, formState: { errors }, handleSubmit } = useForm()
   const {userSignIn} = useContext(AuthContext)
+  const navigate = useNavigate()
+  const location = useLocation()
+  
+
   const onSubmit = (data) => {
     const {email, password} = data;
     userSignIn(email, password)
     .then(() => {
       toast.success('LogIn Successfull')
+      navigate(location?.state || '/')
     })
   }
     return (

@@ -2,7 +2,7 @@ import { MdAddAPhoto } from "react-icons/md";
 import { IoIosPersonAdd } from "react-icons/io";
 import { MdEmail } from "react-icons/md";
 import { FaRegEye } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
@@ -11,6 +11,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Register = () => {
+  const navigate = useNavigate()
+  const location = useLocation()
   const {createUser, updateUserProfile, user, setUser} = useContext(AuthContext)
   const {
     register,
@@ -35,6 +37,7 @@ const Register = () => {
           theme: "light",
           transition: 'Bounce',
           });
+          navigate(location?.state || '/')
       })
     })
   };
