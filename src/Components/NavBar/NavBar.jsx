@@ -38,12 +38,13 @@ const NavBar = () => {
         <NavLink to="/a">Assignments</NavLink>
       </li>
       <li id="nav">
-        <NavLink to="/b">create assignments</NavLink>
+        <NavLink to="/CreateAssignments">create assignments</NavLink>
       </li>
       <li id="nav">
         <NavLink to="/c">pending assignments</NavLink>
       </li>
     </>
+    
   );
   return (
     <div className=" ">
@@ -101,6 +102,15 @@ const NavBar = () => {
             >
               <CiLogin className="w-4 h-4 me-2"></CiLogin>
               Log In
+            </button>
+          </Link>
+          <Link to="/register">
+            <button
+              type="button"
+              className="text-white bg-[#3b5998] hover:bg-[#3b5998]/90 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#3b5998]/55 me-2 mb-2"
+            >
+              <CiLogin className="w-4 h-4 me-2"></CiLogin>
+              Register
             </button>
           </Link>
         </div>

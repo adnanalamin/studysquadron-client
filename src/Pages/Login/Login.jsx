@@ -5,6 +5,7 @@ import { MdEmail } from "react-icons/md";
 import { FaRegEye } from "react-icons/fa";
 
 import loginImg from "../../assets/images/login.jpg"
+import { Link } from "react-router-dom";
 
 
 
@@ -19,7 +20,7 @@ const Login = () => {
             <form>
               <div className="mb-12">
                 <h3 className="text-3xl font-extrabold">Log in</h3>
-                <p className="text-sm mt-4 ">Don not have an account <a href="javascript:void(0);" className="text-blue-600 font-semibold hover:underline ml-1 whitespace-nowrap">Register here</a></p>
+                <p className="text-sm mt-4 ">Don not have an account <Link to='/register'><span className="text-blue-600 font-semibold hover:underline ml-1 whitespace-nowrap">Register here</span></Link></p>
               </div>
               <div>
                 <label className="text-xs block mb-2">Email</label>
