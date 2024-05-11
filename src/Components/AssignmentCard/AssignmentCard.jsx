@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { useContext } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
+import { Link } from "react-router-dom";
 const AssignmentCard = ({ newData, onCardDeleted }) => {
   const { user } = useContext(AuthContext);
   const { _id, title, marks, thumbnailimage, difficultyLevel, email } = newData;
@@ -68,10 +69,16 @@ const AssignmentCard = ({ newData, onCardDeleted }) => {
 
           <div className="mt-4">
             <div className="w-full">
+              <Link to={`/AssignmentDetails/${_id}`}>
               <button className="btn btn-info w-full">view assignment</button>
+              </Link>
+              
             </div>
             <div className="w-full mt-4">
-              <button className="btn btn-warning w-full">update</button>
+              <Link to={`/UpdateAssignment/${_id}`}>
+              <button  className="btn btn-warning w-full">update</button>
+              </Link>
+              
             </div>
             <div className="w-full mt-4">
               <button
