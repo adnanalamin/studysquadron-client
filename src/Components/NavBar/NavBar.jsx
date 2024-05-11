@@ -60,7 +60,7 @@ const NavBar = () => {
         <NavLink to="/CreateAssignments">create assignments</NavLink>
       </li>
       <li id="nav">
-        <NavLink to="/c">pending assignments</NavLink>
+        <NavLink to="/PendingAssignment">pending assignments</NavLink>
       </li>
     </>
     

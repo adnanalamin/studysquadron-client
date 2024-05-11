@@ -7,6 +7,7 @@ import Register from "../Pages/Register/Register";
 import CreateAssignments from "../Pages/CreateAssignments/CreateAssignments";
 import PrivetRouter from "./PrivetRouter";
 import Assignments from "../Pages/Assignments/Assignments";
+import PendingAssignment from "../Pages/PendingAssignment/PendingAssignment";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
       {
         path: '/assignments',
         element: <Assignments></Assignments>
+      },
+      {
+        path:'/PendingAssignment',
+        element: <PendingAssignment></PendingAssignment>
       }
     ],
   },
