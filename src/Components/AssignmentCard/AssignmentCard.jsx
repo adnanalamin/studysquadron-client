@@ -1,6 +1,48 @@
 import PropTypes from "prop-types";
-const AssignmentCard = ({newData}) => {
-  const {title, marks, thumbnailimage, difficultyLevel} = newData;
+import { useContext } from "react";
+import Swal from "sweetalert2";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
+const AssignmentCard = ({ newData, onCardDeleted }) => {
+  const { user } = useContext(AuthContext);
+  const { _id, title, marks, thumbnailimage, difficultyLevel, email } = newData;
+  const handelDelete = (email) => {
+    const userEmail = user.email;
+    if (email === userEmail) {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't to delete this assignment",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          fetch(`http://localhost:5000/delete-assignment/${email}`, {
+            method: "DELETE",
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.deletedCount > 0) {
+                Swal.fire({
+                  title: "Deleted!",
+                  text: "Your Your Assignment has been deleted.",
+                  icon: "success",
+                });
+                onCardDeleted(_id);
+              }
+            });
+        }
+      });
+    } else {
+      Swal.fire({
+        title: "Permission Denied",
+        text: " You can only delete assignments created by yourself",
+        icon: "error",
+      });
+      return;
+    }
+  };
   return (
     <div>
       <div className="flex flex-col sm:flex-row sm:max-w-2xl max-w-xs mx-auto overflow-hidden bg-[#135D66] rounded-lg shadow-lg dark:bg-gray-800 p-2">
@@ -32,16 +74,22 @@ const AssignmentCard = ({newData}) => {
               <button className="btn btn-warning w-full">update</button>
             </div>
             <div className="w-full mt-4">
-              <button className="btn btn-error w-full">Delete</button>
+              <button
+                onClick={() => handelDelete(email)}
+                className="btn btn-error w-full"
+              >
+                Delete
+              </button>
             </div>
           </div>
         </div>
       </div>
     </div>
   );
-}; 
+};
 
 AssignmentCard.propTypes = {
   newData: PropTypes.object.isRequired,
+  onCardDeleted: PropTypes.func,
 };
 export default AssignmentCard;
