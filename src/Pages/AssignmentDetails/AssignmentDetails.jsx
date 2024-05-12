@@ -1,9 +1,14 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
+import { toast } from "react-toastify";
+import { Toaster } from "react-hot-toast";
 
 const AssignmentDetails = () => {
+  const { user } = useContext(AuthContext);
   const [data, setData] = useState({});
+
   const { id } = useParams();
   useEffect(() => {
     async function fetchAssignment() {
@@ -18,6 +23,48 @@ const AssignmentDetails = () => {
     }
     fetchAssignment();
   }, [id]);
+
+  const handelSubmitedAssignment = async (e) => {
+    e.preventDefault();
+
+    const file = e.target.file.value;
+    const note = e.target.note.value;
+    const userEmail = user.email;
+    const userName = user.displayName;
+    const status = "pending";
+    const assignmentTitle = data.title;
+    const assignmentMarks = data.marks;
+
+    if (!file || !note) {
+      toast.error("Please select a file and provide a note.");
+      return;
+    }
+
+    const newSubmittion = {
+      file,
+      note,
+      userName,
+      userEmail,
+      status,
+      assignmentTitle,
+      assignmentMarks,
+    };
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/submit-assignment",
+        newSubmittion
+      );
+
+      if (response.data.insertedId) {
+        toast.success("Assignment submitted successfully");
+      }
+      e.target.reset();
+    } catch (error) {
+      console.error("Error submitting assignment:", error);
+      toast.error("Failed to submit assignment. Please try again later.");
+    }
+  };
   return (
     <div className="pt-24 mb-24">
       <div className="bg-[#135D66] dark:bg-gray-800 py-8 lg:max-w-6xl mx-auto rounded-xl">
@@ -99,22 +146,26 @@ const AssignmentDetails = () => {
       <dialog id="my_modal_1" className="modal ">
         <div className="modal-box bg-[#135D66] dark:bg-gray-700">
           <div className="w-full mx-auto pt-6">
-            <form action="">
+            <form onSubmit={handelSubmitedAssignment}>
               <div className="w-full">
                 <input
-                  type="file"
+                  type="text"
+                  name="file"
                   accept=".pdf,.doc,.docx"
                   className="mb-4 file-input file-input-bordered w-full"
                 />
               </div>
               <div>
                 <textarea
-                  placeholder="Bio"
+                  placeholder="quick note"
+                  name="note"
                   className="textarea textarea-bordered textarea-md w-full"
                 ></textarea>
               </div>
               <div className="w-full mt-3">
-                <button className="btn bg-[#003C43] dark:bg-gray-600 hover:bg-[#003C43] text-white border-none w-full">Submit</button>
+                <button className="btn bg-[#003C43] dark:bg-gray-600 hover:bg-[#003C43] text-white border-none w-full">
+                  Submit
+                </button>
               </div>
             </form>
           </div>
@@ -126,6 +177,7 @@ const AssignmentDetails = () => {
             </form>
           </div>
         </div>
+        <Toaster position="top-right" reverseOrder={false} />
       </dialog>
     </div>
   );
