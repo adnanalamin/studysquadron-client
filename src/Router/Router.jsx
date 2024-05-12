@@ -10,6 +10,7 @@ import Assignments from "../Pages/Assignments/Assignments";
 import PendingAssignment from "../Pages/PendingAssignment/PendingAssignment";
 import UpdateAssignment from "../Pages/UpdateAssignment/UpdateAssignment";
 import AssignmentDetails from "../Pages/AssignmentDetails/AssignmentDetails";
+import AttemptedAssignments from "../Pages/AttemptedAssignments/AttemptedAssignments";
 
 const router = createBrowserRouter([
   {
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
       {
         path: '/AssignmentDetails/:id',
         element: <PrivetRouter><AssignmentDetails></AssignmentDetails></PrivetRouter>
+      },
+      {
+        path: '/AttemptedAssignments',
+        element: <AttemptedAssignments></AttemptedAssignments>
       }
     ],
   },

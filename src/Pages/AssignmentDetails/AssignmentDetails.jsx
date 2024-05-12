@@ -8,6 +8,7 @@ import { Toaster } from "react-hot-toast";
 const AssignmentDetails = () => {
   const { user } = useContext(AuthContext);
   const [data, setData] = useState({});
+  const [showModal, setShowModal] = useState(false);
 
   const { id } = useParams();
   useEffect(() => {
@@ -60,10 +61,19 @@ const AssignmentDetails = () => {
         toast.success("Assignment submitted successfully");
       }
       e.target.reset();
+      closeModal();
     } catch (error) {
       console.error("Error submitting assignment:", error);
       toast.error("Failed to submit assignment. Please try again later.");
     }
+  };
+
+  const openModal = () => {
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
   };
   return (
     <div className="pt-24 mb-24">
@@ -81,9 +91,7 @@ const AssignmentDetails = () => {
               <div className="flex -mx-2 mb-4">
                 <div className="w-1/2 px-2">
                   <button
-                    onClick={() =>
-                      document.getElementById("my_modal_1").showModal()
-                    }
+                    onClick={openModal}
                     className="w-full bg-gray-900 dark:bg-gray-600 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800 dark:hover:bg-gray-700"
                   >
                     Take Assignment
@@ -143,42 +151,47 @@ const AssignmentDetails = () => {
         </div>
       </div>
 
-      <dialog id="my_modal_1" className="modal ">
-        <div className="modal-box bg-[#135D66] dark:bg-gray-700">
-          <div className="w-full mx-auto pt-6">
-            <form onSubmit={handelSubmitedAssignment}>
-              <div className="w-full">
-                <input
-                  type="text"
-                  name="file"
-                  accept=".pdf,.doc,.docx"
-                  className="mb-4 file-input file-input-bordered w-full"
-                />
-              </div>
-              <div>
-                <textarea
-                  placeholder="quick note"
-                  name="note"
-                  className="textarea textarea-bordered textarea-md w-full"
-                ></textarea>
-              </div>
-              <div className="w-full mt-3">
-                <button className="btn bg-[#003C43] dark:bg-gray-600 hover:bg-[#003C43] text-white border-none w-full">
-                  Submit
-                </button>
-              </div>
-            </form>
-          </div>
-          <div className="modal-action">
-            <form method="dialog">
-              <button className="btn btn-sm btn-circle text-white btn-ghost absolute right-2 top-2">
-                ✕
-              </button>
-            </form>
+      {showModal && (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div
+            className="absolute inset-0 bg-black bg-opacity-40"
+            onClick={closeModal}
+          ></div>
+          <div className="modal-box bg-[#135D66] dark:bg-gray-700">
+            <button
+              className="btn btn-sm btn-circle text-white btn-ghost absolute right-2 top-2"
+              onClick={closeModal}
+            >
+              ✕
+            </button>
+            <div className="w-full mx-auto pt-6">
+              <form onSubmit={handelSubmitedAssignment}>
+                <div className="w-full">
+                  <input
+                    type="text"
+                    name="file"
+                    accept=".pdf,.doc,.docx"
+                    className="mb-4 file-input file-input-bordered w-full"
+                  />
+                </div>
+                <div>
+                  <textarea
+                    placeholder="quick note"
+                    name="note"
+                    className="textarea textarea-bordered textarea-md w-full"
+                  ></textarea>
+                </div>
+                <div className="w-full mt-3">
+                  <button className="btn bg-[#003C43] dark:bg-gray-600 hover:bg-[#003C43] text-white border-none w-full">
+                    Submit
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
-        <Toaster position="top-right" reverseOrder={false} />
-      </dialog>
+      )}
+      <Toaster position="top-right" reverseOrder={false} />
     </div>
   );
 };
