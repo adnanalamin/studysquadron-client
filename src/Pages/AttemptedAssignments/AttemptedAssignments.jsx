@@ -1,15 +1,17 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import MyCard from "../../Components/MyCard/MyCard";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 
 const AttemptedAssignments = () => {
     const [data, setData] = useState([]);
+    const {user} = useContext(AuthContext)
     useEffect(() => {
         async function fetchAssignment() {
           try {
             const response = await axios.get(
-              `http://localhost:5000/findstatusassignment/completed`
+              `http://localhost:5000/findsMyassignment/${user.email}?status=completed`
             );
             setData(response.data);
           } catch (error) {
@@ -17,7 +19,7 @@ const AttemptedAssignments = () => {
           }
         }
         fetchAssignment();
-      }, []);
+      }, [user]);
     return (
         <div className="pt-24 mb-24">
       <div className="lg:max-w-6xl mx-auto">
