@@ -29,21 +29,21 @@ const AssignmentDetails = () => {
     e.preventDefault();
 
     const file = e.target.file.value;
-    const note = e.target.note.value;
+    const assignmentnote = e.target.assignmentnote.value;
     const userEmail = user.email;
     const userName = user.displayName;
     const status = "pending";
     const assignmentTitle = data.title;
     const assignmentMarks = data.marks;
 
-    if (!file || !note) {
+    if (!file || !assignmentnote) {
       toast.error("Please select a file and provide a note.");
       return;
     }
 
     const newSubmittion = {
       file,
-      note,
+      assignmentnote,
       userName,
       userEmail,
       status,
@@ -177,7 +177,7 @@ const AssignmentDetails = () => {
                 <div>
                   <textarea
                     placeholder="quick note"
-                    name="note"
+                    name="assignmentnote"
                     className="textarea textarea-bordered textarea-md w-full"
                   ></textarea>
                 </div>

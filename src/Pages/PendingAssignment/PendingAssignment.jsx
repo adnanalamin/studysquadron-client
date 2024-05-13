@@ -1,10 +1,13 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
+import { toast } from "react-toastify";
+// import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 const PendingAssignment = () => {
   const [data, setData] = useState([]);
   const [fileUrl, setFileUrl] = useState("");
   const [showModal, setShowModal] = useState(false);
+  // const { user } = useContext(AuthContext);
 
   useEffect(() => {
     async function fetchAssignment() {
@@ -20,8 +23,8 @@ const PendingAssignment = () => {
     fetchAssignment();
   }, []);
 
-  const openModal = (url) => {
-    setFileUrl(url);
+  const openModal = (data) => {
+    setFileUrl(data);
     setShowModal(true);
   };
 
@@ -31,9 +34,43 @@ const PendingAssignment = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    const number = event.target.number.value;
+    const assignmentFeedback = event.target.assignmentFeedback.value;
     
-    closeModal(); 
+    const status = "completed";
+    const id = fileUrl._id;
+    console.log(id)
+    
+
+    if (!number || !assignmentFeedback) {
+      toast.error("Please provide both number and feedback.");
+      return;
+    }
+
+    const newSubmission = {
+      number,
+      assignmentFeedback,
+      status,
+    };
+
+    try {
+      await axios.put(
+        `http://localhost:5000/updateassignmentmark/${id}`,
+        newSubmission
+      );
+
+      // if (response.data.insertedId) {
+        toast.success("Assignment submitted successfully");
+      // }
+      event.target.reset();
+      closeModal();
+    } catch (error) {
+      console.error("Error submitting assignment:", error);
+      toast.error("Failed to submit assignment. Please try again later.");
+    }
   };
+
 
   return (
     <div className="pt-24 mb-24">
@@ -63,31 +100,32 @@ const PendingAssignment = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {data.map((newData, index) => (
+                    {data.map((assignment, index) => (
                       <tr
-                        key={newData._id}
+                        key={assignment._id}
                         style={{
                           backgroundColor:
                             index % 2 === 0 ? "#B3C8CF" : "#BED7DC",
                         }}
                       >
                         <td className="px-6 py-4 whitespace-nowrap dark:text-[#240A34] font-semibold ">
-                          {newData.assignmentTitle}
+                          {assignment.assignmentTitle}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap dark:text-[#240A34] font-semibold ">
-                          {newData.assignmentMarks}
+                          {assignment.assignmentMarks}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap dark:text-[#240A34] font-semibold ">
-                          {newData.userName}
+                          {assignment.userName}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap dark:text-[#240A34] font-semibold ">
                           <span className="px-2 inline-flex text-xs   leading-5 font-semibold rounded-full bg-[#FF0080] dark:bg-[#31363F] dark:text-white text-[#CDE8E5]">
-                            {newData.status}
+                            {assignment.status}
                           </span>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
+                          
                           <button
-                            onClick={() => openModal(newData.file)}
+                            onClick={() => openModal(assignment)}
                             className="px-4 py-2 font-medium text-white bg-[#135D66] rounded-md hover:bg-blue-500 focus:outline-none focus:shadow-outline-blue active:bg-blue-600 transition duration-150 ease-in-out"
                           >
                             Give Mark
@@ -112,19 +150,30 @@ const PendingAssignment = () => {
               ✕
             </button>
             <div className="flex lg:flex-row flex-col h-full pt-10">
-              <iframe className="lg:w-1/2 w-full" src={fileUrl}></iframe>
+              <iframe className="lg:w-1/2 w-full" src={fileUrl.file}></iframe>
               <form onSubmit={handleSubmit} className="lg:w-1/2 w-full lg:ml-6">
+                
+                <div className="bg-[#E3FEF7]  rounded-lg mb-6 px-4 py-4">
+                <div className="w-4/5 h-auto">
+                <h1 className="font-bold text-lg">Note:</h1>
+                
+                <div className="max-w-[80%]">
+                <p className="font-semibold text-sm block whitespace-pre-wrap ">{fileUrl.assignmentnote}</p>
+                </div>
+                </div>
+                </div>
                 <div className="w-full">
                   <input
-                    type="text"
-                    name="file"
+                    type="number"
+                    name="number"
                     className="mb-4 file-input file-input-bordered w-full"
                   />
                 </div>
                 <div>
+                  
                   <textarea
                     placeholder="quick note"
-                    name="note"
+                    name="assignmentFeedback"
                     className="textarea textarea-bordered textarea-md w-full"
                   ></textarea>
                 </div>
