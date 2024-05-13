@@ -9,6 +9,7 @@ import { AuthContext } from "../../AuthProvider/AuthProvider";
 import { ToastContainer, toast } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
+import axios from "axios";
 
 const Register = () => {
   const navigate = useNavigate()
@@ -19,28 +20,37 @@ const Register = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const onSubmit = (data) => {
+  const onSubmit = async(data) => {
     const {name, photoURL, email, password} = data;
-    createUser(email, password)
-    .then(() => {
-      updateUserProfile(name, photoURL)
-      .then(() => {
-        setUser({ ...user?.user, photoURL: photoURL, displayName: name })
-        toast.success('Register Successfull', {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          transition: 'Bounce',
-          });
-          navigate(location?.state || '/')
-      })
-    })
+    try{
+      const result = await createUser(email, password)
+      await updateUserProfile(name, photoURL)
+      setUser({ ...user?.user, photoURL: photoURL, displayName: name })
+      await axios.post(
+        'http://localhost:5000/jwt',
+        {
+          email: result?.user?.email,
+        },
+        { withCredentials: true }
+      )
+      toast.success('Register Successfull', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: 'Bounce',
+        });
+        navigate(location?.state || '/')
+    } catch (err) {
+      toast.error(err?.message)
+    }
+    
   };
+  
   return (
     <div className="pt-24 mb-24 ">
       <div className="font-[sans-serif] bg-white text-white md:h-screen lg:max-w-6xl mx-auto">

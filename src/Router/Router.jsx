@@ -40,7 +40,7 @@ const router = createBrowserRouter([
       },
       {
         path:'/PendingAssignment',
-        element: <PendingAssignment></PendingAssignment>
+        element: <PrivetRouter><PendingAssignment></PendingAssignment></PrivetRouter>
       },
       {
         path: '/UpdateAssignment/:id',
@@ -52,7 +52,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/AttemptedAssignments',
-        element: <AttemptedAssignments></AttemptedAssignments>
+        element: <PrivetRouter><AttemptedAssignments></AttemptedAssignments></PrivetRouter>
       }
     ],
   },

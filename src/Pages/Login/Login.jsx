@@ -9,24 +9,52 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import toast, { Toaster } from 'react-hot-toast';
+import axios from "axios";
 
 
 
 
 const Login = () => {
   const { register, formState: { errors }, handleSubmit } = useForm()
-  const {userSignIn} = useContext(AuthContext)
+  const {userSignIn, googleLogin} = useContext(AuthContext)
   const navigate = useNavigate()
   const location = useLocation()
   
 
-  const onSubmit = (data) => {
+  const onSubmit = async(data) => {
     const {email, password} = data;
-    userSignIn(email, password)
-    .then(() => {
-      toast.success('LogIn Successfull')
+    try {
+      const result = await userSignIn(email, password)
+      await axios.post(
+        'http://localhost:5000/jwt',
+        {
+          email: result?.user?.email,
+        },
+        { withCredentials: true }
+      )
+      
+      toast.success('Login Successfull')
       navigate(location?.state || '/')
-    })
+    } catch (err) {
+      toast.error(err?.message)
+    }
+  }
+
+  const handleGoogleSignIn = async () => {
+    try {
+      const result = await googleLogin()
+      await axios.post(
+        'http://localhost:5000/jwt',
+        {
+          email: result?.user?.email,
+        },
+        { withCredentials: true }
+      )
+      toast.success('Signin Successful')
+      navigate(location?.state || '/')
+    } catch (err) {
+      toast.error(err?.message)
+    }
   }
     return (
         <div className="pt-14">
@@ -78,7 +106,7 @@ const Login = () => {
               </div>
               <p className="my-8 text-sm text-gray-400 text-center">or continue with</p>
               <div className="space-x-8 flex justify-center">
-                <button type="button"
+                <button onClick={handleGoogleSignIn} type="button"
                   className="border-none outline-none">
                   <BsGoogle className="text-3xl text-[#77B0AA]"></BsGoogle>
                 </button>

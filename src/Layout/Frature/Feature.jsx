@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 const Feature = () => {
   return (
     <div>
@@ -12,8 +13,24 @@ const Feature = () => {
             assignment platform, fostering collaboration, communication, and
             academic success among students
           </p>
-          <ul className="mt-16 grid grid-cols-1 gap-6 text-center text-slate-700 md:grid-cols-3">
-            <li className="rounded-xl bg-white dark:bg-[#31363F] px-6 py-8 shadow-sm">
+          <motion.ul
+            variants={{
+              hidden: { opacity: 0 },
+              show: {
+                opacity: 1,
+                transition: {
+                  staggerChildren: 0.25,
+                },
+              },
+            }}
+            initial="hidden"
+            animate="show"
+            className="mt-16 grid grid-cols-1 gap-6 text-center text-slate-700 md:grid-cols-3"
+          >
+            <motion.li
+              variants={{ hidden: { opacity: 0 }, show: { opacity: 1 } }}
+              className="rounded-xl bg-white dark:bg-[#31363F] px-6 py-8 shadow-sm"
+            >
               <img
                 src="https://www.svgrepo.com/show/530438/ddos-protection.svg"
                 alt=""
@@ -27,8 +44,11 @@ const Feature = () => {
                 shared interests.Provide features for group leaders to manage
                 memberships, set group goals, and schedule study sessions
               </p>
-            </li>
-            <li className="rounded-xl bg-white dark:bg-[#31363F] px-6 py-8 shadow-sm">
+            </motion.li>
+            <motion.li
+              variants={{ hidden: { opacity: 0 }, show: { opacity: 1 } }}
+              className="rounded-xl bg-white dark:bg-[#31363F] px-6 py-8 shadow-sm"
+            >
               <img
                 src="https://www.svgrepo.com/show/530442/port-detection.svg"
                 alt=""
@@ -42,8 +62,11 @@ const Feature = () => {
                 study materials like notes, presentations, and reference
                 materials.
               </p>
-            </li>
-            <li className="rounded-xl dark:bg-[#31363F] bg-white px-6 py-8 shadow-sm">
+            </motion.li>
+            <motion.li
+              variants={{ hidden: { opacity: 0 }, show: { opacity: 1 } }}
+              className="rounded-xl dark:bg-[#31363F] bg-white px-6 py-8 shadow-sm"
+            >
               <img
                 src="https://www.svgrepo.com/show/530444/availability.svg"
                 alt=""
@@ -58,8 +81,11 @@ const Feature = () => {
                 users to track their progress on assigned tasks and view overall
                 group progress.
               </p>
-            </li>
-            <li className="rounded-xl dark:bg-[#31363F] bg-white px-6 py-8 shadow-sm">
+            </motion.li>
+            <motion.li
+              variants={{ hidden: { opacity: 0 }, show: { opacity: 1 } }}
+              className="rounded-xl dark:bg-[#31363F] bg-white px-6 py-8 shadow-sm"
+            >
               <a href="/pricing" className="group">
                 <img
                   src="https://www.svgrepo.com/show/530440/machine-vision.svg"
@@ -76,8 +102,11 @@ const Feature = () => {
                   engage in academic discussions.
                 </p>
               </a>
-            </li>
-            <li className="rounded-xl dark:bg-[#31363F] bg-white px-6 py-8 shadow-sm">
+            </motion.li>
+            <motion.li
+              variants={{ hidden: { opacity: 0 }, show: { opacity: 1 } }}
+              className="rounded-xl dark:bg-[#31363F] bg-white px-6 py-8 shadow-sm"
+            >
               <a href="/templates" className="group">
                 <img
                   src="https://www.svgrepo.com/show/530450/page-analysis.svg"
@@ -93,8 +122,11 @@ const Feature = () => {
                   materials and assignments.
                 </p>
               </a>
-            </li>
-            <li className="rounded-xl dark:bg-[#31363F] bg-white px-6 py-8 shadow-sm">
+            </motion.li>
+            <motion.li
+              variants={{ hidden: { opacity: 0 }, show: { opacity: 1 } }}
+              className="rounded-xl dark:bg-[#31363F] bg-white px-6 py-8 shadow-sm"
+            >
               <a href="/download" className="group">
                 <img
                   src="https://www.svgrepo.com/show/530453/mail-reception.svg"
@@ -110,8 +142,8 @@ const Feature = () => {
                   growth.
                 </p>
               </a>
-            </li>
-          </ul>
+            </motion.li>
+          </motion.ul>
         </div>
 
         <div></div>

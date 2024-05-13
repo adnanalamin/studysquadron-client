@@ -12,6 +12,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import app from "../firebase/firebase.config";
+import axios from "axios";
 
 const auth = getAuth(app);
 
@@ -39,10 +40,19 @@ const AuthProvider = ({ children }) => {
 
   // LogOut
 
-  const userLogout = () => {
-    setLoading(true);
-    return signOut(auth);
-  };
+  // const userLogout = () => {
+  //   setLoading(true);
+  //   return signOut(auth);
+  // };
+
+  const userLogout = async () => {
+    setLoading(true)
+    const { data } = await axios('http://localhost:5000/logout', {
+      withCredentials: true,
+    })
+    console.log(data)
+    return signOut(auth)
+  }
 
   // Google Login
 
