@@ -1,6 +1,6 @@
 # Study Squadron
 
-[Live Site]([http://www.studysquadron.com](https://study-squadron.web.app/))
+[Live Site]((https://study-squadron.web.app/))
 
 Study Squadron is an online platform designed to streamline assignment management and submission for educational purposes.
 
