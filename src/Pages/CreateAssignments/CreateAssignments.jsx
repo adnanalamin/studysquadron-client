@@ -3,12 +3,14 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const CreateAssignments = () => {
   const [dueDate, setDueDate] = useState(new Date());
   const [difficultyLevel, setDifficultyLevel] = useState();
-  const [errors, setErrors] = useState({});
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate()
 
   const handelDifficultyChange = (e) => {
     setDifficultyLevel(e.target.value);
@@ -22,17 +24,30 @@ const CreateAssignments = () => {
     const email = user.email;
     const userName = user.displayName;
 
-    if (
-      !title ||
-      !marks ||
-      !description ||
-      !thumbnailimage ||
-      !dueDate ||
-      !difficultyLevel
-    ) {
-      setErrors({ message: "Please fill out This fields" });
-      return;
+    
+    if (isNaN(marks) || marks === '') {
+      toast.error("Please fill out all required fields")
+      return; 
+    } else if (parseInt(marks) >= 100) {
+      toast.error("Marks must be less than 100")
+      return; 
     }
+  
+    
+    if (!title) {
+      toast.error("Please fill out all required fields")
+      return; 
+    }
+    if (!description) {
+      toast.error("Please fill out all required fields")
+      return; 
+    }
+    if (!thumbnailimage) {
+      toast.error("Please fill out all required fields")
+      return; 
+    }
+
+
     const assignment = {
       title,
       marks,
@@ -44,8 +59,8 @@ const CreateAssignments = () => {
       userName,
     };
     console.log(assignment);
-    setErrors({});
-    fetch("http://localhost:5000/assignment", {
+    
+    fetch("https://studysquadron-server.vercel.app/assignment", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -58,12 +73,13 @@ const CreateAssignments = () => {
         if (data.insertedId) {
           Swal.fire({
             title: "success",
-            text: "Assignment add successfully",
+            text: "Assignment will be created successfully",
             icon: "success",
           });
           setDueDate(new Date());
           setDifficultyLevel(null);
           e.target.reset();
+          navigate('/assignments')
         }
       });
   };
@@ -86,9 +102,7 @@ const CreateAssignments = () => {
                     placeholder="Assignment Title"
                     name="title"
                   />
-                  {errors.message && (
-                    <p className="text-red-500">{errors.message}</p>
-                  )}
+                  
                 </div>
 
                 <div>
@@ -98,9 +112,7 @@ const CreateAssignments = () => {
                     placeholder="Assignment Marks"
                     name="marks"
                   />
-                  {errors.message && (
-                    <p className="text-red-500">{errors.message}</p>
-                  )}
+                  
                 </div>
                 <div>
                   <select
@@ -127,9 +139,7 @@ const CreateAssignments = () => {
                   selected={dueDate || 0}
                   onChange={(date) => setDueDate(date)}
                 />
-                {errors.message && (
-                  <p className="text-red-500">{errors.message}</p>
-                )}
+                
               </div>
               <div className="my-4">
                 <input
@@ -138,9 +148,7 @@ const CreateAssignments = () => {
                   placeholder="Thumbnail Image URL"
                   name="thumbnailimage"
                 />
-                {errors.message && (
-                  <p className="text-red-500">{errors.message}</p>
-                )}
+                
               </div>
               <div className="my-4">
                 <textarea
@@ -148,9 +156,7 @@ const CreateAssignments = () => {
                   name="description"
                   className="w-full h-32 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600 bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
                 ></textarea>
-                {errors.message && (
-                  <p className="text-red-500">{errors.message}</p>
-                )}
+                
               </div>
               <div className="my-2 w-1/2 lg:w-1/4">
                 <button className="btn uppercase text-sm font-bold tracking-wide bg-[#003C43] text-gray-100 p-3 rounded-lg w-full focus:outline-none focus:shadow-outline dark:bg-[#0C0C0C]">

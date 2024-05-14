@@ -19,7 +19,7 @@ const AssignmentCard = ({ newData, onCardDeleted }) => {
         confirmButtonText: "Yes, delete it!",
       }).then((result) => {
         if (result.isConfirmed) {
-          fetch(`http://localhost:5000/delete-assignment/${email}`, {
+          fetch(`https://studysquadron-server.vercel.app/delete-assignment/${email}`, {
             method: "DELETE",
           })
             .then((res) => res.json())
@@ -46,7 +46,7 @@ const AssignmentCard = ({ newData, onCardDeleted }) => {
   };
   return (
     <div>
-      <div className="flex flex-col sm:flex-row sm:max-w-2xl max-w-xs mx-auto overflow-hidden bg-[#135D66] rounded-lg shadow-lg dark:bg-gray-800 p-2">
+      <div className="flex flex-col h-[400px] sm:flex-row sm:max-w-2xl max-w-xs mx-auto overflow-hidden bg-[#135D66] rounded-lg shadow-lg dark:bg-gray-800 p-2">
         <div className="p-2 h-96 sm:w-1/2">
           <img
             className="rounded object-cover w-full sm:h-full h-full"
@@ -56,13 +56,13 @@ const AssignmentCard = ({ newData, onCardDeleted }) => {
         </div>
         <div className="sm:p-4 p-2 sm:w-1/2 flex flex-col justify-between">
           <div>
-            <h2 className="block sm:mt-2 text-2xl font-semibold text-gray-50 dark:text-white ">
+            <h2 className="block sm:mt-2 text-xl font-semibold text-gray-50 dark:text-white ">
               {title}
             </h2>
-            <h2 className="block sm:mt-2 text-2xl font-semibold text-gray-50 dark:text-white ">
+            <h2 className="block sm:mt-2 text-lg font-semibold text-gray-50 dark:text-white ">
               Marks : {marks}
             </h2>
-            <h2 className="block sm:mt-2 text-2xl font-semibold text-gray-50 dark:text-white ">
+            <h2 className="block sm:mt-2 text-lg font-semibold text-gray-50 dark:text-white ">
               level: {difficultyLevel}
             </h2>
           </div>

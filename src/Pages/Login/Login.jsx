@@ -26,7 +26,7 @@ const Login = () => {
     try {
       const result = await userSignIn(email, password)
       await axios.post(
-        'http://localhost:5000/jwt',
+        'https://studysquadron-server.vercel.app/jwt',
         {
           email: result?.user?.email,
         },
@@ -44,7 +44,7 @@ const Login = () => {
     try {
       const result = await googleLogin()
       await axios.post(
-        'http://localhost:5000/jwt',
+        'https://studysquadron-server.vercel.app/jwt',
         {
           email: result?.user?.email,
         },

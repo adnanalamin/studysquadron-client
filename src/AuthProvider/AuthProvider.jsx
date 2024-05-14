@@ -47,7 +47,7 @@ const AuthProvider = ({ children }) => {
 
   const userLogout = async () => {
     setLoading(true)
-    const { data } = await axios('http://localhost:5000/logout', {
+    const { data } = await axios('https://studysquadron-server.vercel.app/logout', {
       withCredentials: true,
     })
     console.log(data)

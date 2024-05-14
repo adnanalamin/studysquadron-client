@@ -1,21 +1,23 @@
 import axios from "axios";
 import {  useEffect, useState } from "react";
 import { toast } from "react-toastify";
-// import { AuthContext } from "../../AuthProvider/AuthProvider";
+import Loader from "../../Components/Loader/Loader";
 
 const PendingAssignment = () => {
   const [data, setData] = useState([]);
   const [fileUrl, setFileUrl] = useState("");
   const [showModal, setShowModal] = useState(false);
-  // const { user } = useContext(AuthContext);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchAssignment() {
       try {
         const response = await axios.get(
-          `http://localhost:5000/findstatusassignment/pending`
+          `https://studysquadron-server.vercel.app/findstatusassignment/pending`,
+          {withCredentials: true }
         );
         setData(response.data);
+        setLoading(false)
       } catch (error) {
         console.error("Error fetching assignment:", error);
       }
@@ -56,7 +58,7 @@ const PendingAssignment = () => {
 
     try {
       await axios.put(
-        `http://localhost:5000/updateassignmentmark/${id}`,
+        `https://studysquadron-server.vercel.app/updateassignmentmark/${id}`,
         newSubmission
       );
 
@@ -74,6 +76,7 @@ const PendingAssignment = () => {
 
   return (
     <div className="pt-24 mb-24">
+      
       <div className="lg:max-w-6xl mx-auto">
         <div className="flex flex-col overflow-x-auto lg:overflow-hidden">
           <div className="sm:-mx-6 lg:-mx-8">
@@ -99,6 +102,7 @@ const PendingAssignment = () => {
                       </th>
                     </tr>
                   </thead>
+                  {loading && <Loader className='w-full mx-auto'></Loader>}
                   <tbody>
                     {data.map((assignment, index) => (
                       <tr
@@ -157,8 +161,8 @@ const PendingAssignment = () => {
                 <div className="w-4/5 h-auto">
                 <h1 className="font-bold text-lg">Note:</h1>
                 
-                <div className="max-w-[80%]">
-                <p className="font-semibold text-sm block whitespace-pre-wrap ">{fileUrl.assignmentnote}</p>
+                <div className="w-full">
+                <p className="font-semibold text-sm block overflow-hidden whitespace-pre-wrap ">{fileUrl.assignmentnote}</p>
                 </div>
                 </div>
                 </div>

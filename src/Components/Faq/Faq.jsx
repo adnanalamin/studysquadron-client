@@ -2,10 +2,10 @@ const Faq = () => {
   return (
     <div className="lg:max-w-6xl mx-auto mt-16">
       <div className="text-center">
-        <h2 className="text-2xl font-semibold sm:text-4xl">
+        <h2 className="text-2xl font-semibold sm:text-4xl dark:text-white">
           Frequently Asked Questions
         </h2>
-        <h3 className="mt-4 mb-8 dark:text-gray-600 md:w-1/2 mx-auto">
+        <h3 className="mt-4 mb-8 text-gray-600 md:w-1/2 mx-auto dark:text-white">
           Sagittis tempor donec id vestibulum viverra. Neque condimentum primis
           orci at lacus amet bibendum.
         </h3>
@@ -26,35 +26,35 @@ const Faq = () => {
           />
         </div>
         <div className="pr-2 md:mb-14 py-14 md:py-0">
-          <section className="dark:bg-gray-100 dark:text-gray-800 w-full">
+          <section className=" dark:bg-transparent dark:text-gray-800 w-full">
             <div className="container flex flex-col justify-center px-4 py-8 mx-auto md:p-8">
               <div className="space-y-4 w-full">
-                <details className="w-full border rounded-lg bg-[#77B0AA]">
-                  <summary className="px-4 py-6 focus:outline-none focus-visible:dark:ring-violet-600">
+                <details className="w-full border   rounded-lg dark:bg-gray-500 dark:border-none bg-[#77B0AA]">
+                  <summary className="px-4 py-6 dark:text-white focus:outline-none focus-visible:dark:ring-violet-600">
                     How can I join StudySquadron?
                   </summary>
-                  <p className="px-4 py-6 pt-0 ml-4 -mt-4  dark:text-gray-600">
+                  <p className="px-4 py-6 pt-0 ml-4 dark:text-white -mt-4  ">
                     Joining StudySquadron is easy! Simply visit our website and
                     sign up for an account. Once registered, you will have
                     access to our range of services and resources.
                   </p>
                 </details>
-                <details className="w-full border rounded-lg bg-[#77B0AA]">
-                  <summary className="px-4 py-6 focus:outline-none focus-visible:dark:ring-violet-600">
+                <details className="w-full border rounded-lg dark:bg-gray-500 dark:border-none bg-[#77B0AA]">
+                  <summary className="px-4 py-6 dark:text-white focus:outline-none focus-visible:dark:ring-violet-600">
                     What subjects does Study Squadron cover?
                   </summary>
-                  <p className="px-4 py-6 pt-0 ml-4 -mt-4 dark:text-gray-600">
+                  <p className="px-4 py-6 pt-0 dark:text-white ml-4 -mt-4 ">
                     Study Squadron offers tutoring and support in a wide range
                     of subjects, including math, science, language arts,
                     history, and more. Our team of experienced tutors can assist
                     with various academic needs.
                   </p>
                 </details>
-                <details className="w-full border rounded-lg bg-[#77B0AA]">
-                  <summary className="px-4 py-6 focus:outline-none focus-visible:dark:ring-violet-600">
+                <details className="w-full border dark:bg-gray-500 dark:border-none rounded-lg bg-[#77B0AA]">
+                  <summary className="px-4 py-6 focus:outline-none dark:text-white focus-visible:dark:ring-violet-600">
                     Is StudySquadron suitable for all academic levels?
                   </summary>
-                  <p className="px-4 py-6 pt-0 ml-4 -mt-4 dark:text-gray-600">
+                  <p className="px-4 py-6 pt-0 ml-4 -mt-4 dark:text-white">
                     Absolutely! Whether you are a high school student preparing
                     for exams, a college student needing assistance with
                     coursework, or an adult learner seeking to enhance your

@@ -46,16 +46,27 @@ const MyCard = ({ item }) => {
               <dt className="text-sm font-medium text-gray-500 dark:text-white">
                 Your obtained marks
               </dt>
-              <dd className="mt-1 text-sm text-gray-900 sm:mt-0 dark:text-white sm:col-span-2">
-                {number}
+              <dd
+                className={`mt-1 text-sm sm:mt-0 sm:col-span-2 ${
+                  number ? "text-black dark:text-white" : "text-red-500 dark:text-red-500"
+                }`}
+              >
+                {number || "Your assignment has been pending."}
               </dd>
             </div>
             <div className="bg-[#9AC8CD] dark:bg-[#35374B] px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt className="text-sm font-medium text-gray-500 dark:text-white">
                 Assignment Feedback
               </dt>
-              <dd className="mt-1 text-sm text-gray-900 dark:text-white sm:mt-0 sm:col-span-2">
-                {assignmentFeedback}
+
+              <dd
+                className={`mt-1 text-sm sm:mt-0 sm:col-span-2 ${
+                  assignmentFeedback
+                    ? "text-black dark:text-white"
+                    : "text-red-500 dark:text-red-500"
+                }`}
+              >
+                {assignmentFeedback || "Your assignment has been pending."}
               </dd>
             </div>
           </dl>

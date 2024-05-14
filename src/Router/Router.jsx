@@ -36,7 +36,8 @@ const router = createBrowserRouter([
       },
       {
         path: '/assignments',
-        element: <Assignments></Assignments>
+        element: <Assignments></Assignments>,
+        loader: () => fetch('https://studysquadron-server.vercel.app/assignmentCount')
       },
       {
         path:'/PendingAssignment',

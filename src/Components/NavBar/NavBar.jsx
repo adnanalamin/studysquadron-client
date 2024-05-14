@@ -70,8 +70,8 @@ const NavBar = () => {
       <div
         className={`navbar bg-[#003C43] z-50  text-white fixed   ${
           scrolling
-            ? "bg-[#003C43] h-14  transition duration-500 ease-in-out"
-            : "bg-[#135D66] h-14 w-full lg:max-w-6xl lg:mx-auto top-0 left-0 right-0 z-none transition duration-500 ease-in-out"
+            ? "bg-[#003C43] dark:bg-black h-14  transition duration-500 ease-in-out"
+            : "bg-[#135D66] dark:bg-black h-14 w-full lg:max-w-6xl lg:mx-auto top-0 left-0 right-0 z-none transition duration-500 ease-in-out"
         }`}
       >
         <div className="navbar-start">

@@ -18,7 +18,7 @@ const UpdateAssignment = () => {
     async function fetchAssignment() {
       try {
         const response = await axios.get(
-          `http://localhost:5000/findassignment/${id}`
+          `https://studysquadron-server.vercel.app/findassignment/${id}`
         );
         setDefaultData(response.data);
 
@@ -54,7 +54,7 @@ const UpdateAssignment = () => {
     };
     try {
       await axios.put(
-        `http://localhost:5000/updateassignment/${id}`,
+        `https://studysquadron-server.vercel.app/updateassignment/${id}`,
         updateAssignmentItem
       );
       

@@ -15,7 +15,7 @@ const AssignmentDetails = () => {
     async function fetchAssignment() {
       try {
         const response = await axios.get(
-          `http://localhost:5000/findassignment/${id}`
+          `https://studysquadron-server.vercel.app/findassignment/${id}`
         );
         setData(response.data);
       } catch (error) {
@@ -53,7 +53,7 @@ const AssignmentDetails = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/submit-assignment",
+        "https://studysquadron-server.vercel.app/submit-assignment",
         newSubmittion
       );
 

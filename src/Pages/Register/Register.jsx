@@ -27,7 +27,7 @@ const Register = () => {
       await updateUserProfile(name, photoURL)
       setUser({ ...user?.user, photoURL: photoURL, displayName: name })
       await axios.post(
-        'http://localhost:5000/jwt',
+        'https://studysquadron-server.vercel.app/jwt',
         {
           email: result?.user?.email,
         },
