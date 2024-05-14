@@ -1,5 +1,5 @@
 import axios from "axios";
-import {  useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import Loader from "../../Components/Loader/Loader";
 
@@ -14,10 +14,10 @@ const PendingAssignment = () => {
       try {
         const response = await axios.get(
           `https://studysquadron-server.vercel.app/findstatusassignment/pending`,
-          {withCredentials: true }
+          { withCredentials: true }
         );
         setData(response.data);
-        setLoading(false)
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching assignment:", error);
       }
@@ -39,11 +39,10 @@ const PendingAssignment = () => {
 
     const number = event.target.number.value;
     const assignmentFeedback = event.target.assignmentFeedback.value;
-    
+
     const status = "completed";
     const id = fileUrl._id;
-    console.log(id)
-    
+    console.log(id);
 
     if (!number || !assignmentFeedback) {
       toast.error("Please provide both number and feedback.");
@@ -62,9 +61,8 @@ const PendingAssignment = () => {
         newSubmission
       );
 
-      // if (response.data.insertedId) {
-        toast.success("Assignment submitted successfully");
-      // }
+      toast.success("Mark Submit successfully");
+
       event.target.reset();
       closeModal();
     } catch (error) {
@@ -73,10 +71,8 @@ const PendingAssignment = () => {
     }
   };
 
-
   return (
     <div className="pt-24 mb-24">
-      
       <div className="lg:max-w-6xl mx-auto">
         <div className="flex flex-col overflow-x-auto lg:overflow-hidden">
           <div className="sm:-mx-6 lg:-mx-8">
@@ -102,7 +98,7 @@ const PendingAssignment = () => {
                       </th>
                     </tr>
                   </thead>
-                  {loading && <Loader className='w-full mx-auto'></Loader>}
+                  {loading && <Loader className="w-full mx-auto"></Loader>}
                   <tbody>
                     {data.map((assignment, index) => (
                       <tr
@@ -127,7 +123,6 @@ const PendingAssignment = () => {
                           </span>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          
                           <button
                             onClick={() => openModal(assignment)}
                             className="px-4 py-2 font-medium text-white bg-[#135D66] rounded-md hover:bg-blue-500 focus:outline-none focus:shadow-outline-blue active:bg-blue-600 transition duration-150 ease-in-out"
@@ -156,28 +151,41 @@ const PendingAssignment = () => {
             <div className="flex lg:flex-row flex-col h-full pt-10">
               <iframe className="lg:w-1/2 w-full" src={fileUrl.file}></iframe>
               <form onSubmit={handleSubmit} className="lg:w-1/2 w-full lg:ml-6">
-                
                 <div className="bg-[#E3FEF7]  rounded-lg mb-6 px-4 py-4">
-                <div className="w-4/5 h-auto">
-                <h1 className="font-bold text-lg">Note:</h1>
-                
-                <div className="w-full">
-                <p className="font-semibold text-sm block overflow-hidden whitespace-pre-wrap ">{fileUrl.assignmentnote}</p>
+                  <div className="w-4/5 h-auto">
+                    <h1 className="font-bold text-lg">Note:</h1>
+
+                    <div className="w-full">
+                      <p className="font-semibold text-sm block overflow-hidden whitespace-pre-wrap ">
+                        {fileUrl.assignmentnote}
+                      </p>
+                    </div>
+                  </div>
                 </div>
-                </div>
+                <div className="bg-[#E3FEF7]  rounded-lg mb-6 px-4 py-4">
+                  <div className="w-4/5 h-auto">
+                    <h1 className="font-bold text-lg">Note:</h1>
+
+                    <div className="w-full">
+                      <p className="font-semibold text-sm block overflow-hidden whitespace-pre-wrap ">
+                        {fileUrl.userName}
+                      </p>
+                    </div>
+                  </div>
                 </div>
                 <div className="w-full">
                   <input
                     type="number"
                     name="number"
+                    required
                     className="mb-4 file-input file-input-bordered w-full"
                   />
                 </div>
                 <div>
-                  
                   <textarea
                     placeholder="quick note"
                     name="assignmentFeedback"
+                    required
                     className="textarea textarea-bordered textarea-md w-full"
                   ></textarea>
                 </div>

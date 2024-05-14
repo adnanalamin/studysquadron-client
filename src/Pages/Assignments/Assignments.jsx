@@ -99,7 +99,7 @@ const Assignments = () => {
             </div>
           </div>
         </div>
-        <div className="lg:grid lg:grid-cols-2 lg:gap-2">
+        <div className="grid lg:grid-cols-2 lg:gap-2 gap-y-4">
           {allAssignment.map((newData) => (
             <AssignmentCard
               key={newData._id}

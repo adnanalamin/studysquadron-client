@@ -94,13 +94,13 @@ const NavBar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+              className="menu menu-sm bg-[#003C43] dropdown-content mt-3 z-[1] p-2 shadow  rounded-box w-52"
             >
               {navItems}
             </ul>
           </div>
           <div className="w-24">
-            <img src={logo} alt="Logo" className="" />
+            <img src={logo} alt="Logo" className="hidden lg:flex md:flex" />
           </div>
         </div>
         <div className="navbar-center hidden lg:flex">
@@ -109,7 +109,7 @@ const NavBar = () => {
         <div className="navbar-end">
         <button
             onClick={() => darkModeHandler()}
-            className="md:mr-2 w-10 h-10"
+            className="mr-2 w-10 h-10"
           >
             {dark && <IoSunny className="w-6 h-6"></IoSunny>}
             {!dark && <IoMoon className="w-6 h-6"></IoMoon>}
@@ -134,7 +134,7 @@ const NavBar = () => {
               className="text-white bg-[#003C43] hover:bg-[#135D66]/90 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#3b5998]/55 me-2 mb-2"
             >
               <CiLogin className="w-4 h-4 me-2"></CiLogin>
-              Log In
+              SignIn
             </button>
           </Link>
           <Link to="/register">

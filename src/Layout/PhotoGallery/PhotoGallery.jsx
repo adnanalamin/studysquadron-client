@@ -1,7 +1,7 @@
 const PhotoGallery = () => {
   return (
-    <div className="mb-80">
-      <div className="bg-white dark:bg-black h-screen lg:max-w-6xl lg:mx-auto py-6 sm:py-8 lg:py-12">
+    <div className="mb-12">
+      <div className="bg-white dark:bg-black  lg:max-w-6xl lg:mx-auto py-6 sm:py-8 lg:py-12">
         <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
           <div className="mb-4  sm:mb-8 md:mb-12">
             <div className="text-center">

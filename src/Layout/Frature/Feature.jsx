@@ -1,13 +1,14 @@
 import { motion } from "framer-motion";
+import './feature.css'
 const Feature = () => {
   return (
-    <div>
-      <div className="bg-gray-200 dark:bg-black px-2 py-10">
+    <div className="bg-fixed bg-center bg-cover custom-img">
+      <div className=" dark:bg-[#00000068] px-2 py-10">
         <div id="features" className="mx-auto max-w-6xl">
-          <h2 className="text-center dark:text-white font-display text-3xl font-bold tracking-tight text-slate-900 md:text-6xl">
+          <h2 className="text-center text-white font-display text-3xl font-bold tracking-tight  md:text-6xl">
             Features
           </h2>
-          <p className="text-center dark:text-white lg:w-3/5 lg:mx-auto mt-5 text-base font-semibold leading-7 text-primary-500">
+          <p className="text-center text-white lg:w-3/5 lg:mx-auto mt-5 text-base font-semibold leading-7 ">
             These feature sections aim to provide a comprehensive overview of
             the functionalities required for an effective Online Group-Study
             assignment platform, fostering collaboration, communication, and

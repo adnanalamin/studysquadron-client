@@ -46,7 +46,7 @@ const AssignmentCard = ({ newData, onCardDeleted }) => {
   };
   return (
     <div>
-      <div className="flex flex-col h-[400px] sm:flex-row sm:max-w-2xl max-w-xs mx-auto overflow-hidden bg-[#135D66] rounded-lg shadow-lg dark:bg-gray-800 p-2">
+      <div className="flex flex-col lg:h-[400px] sm:flex-row sm:max-w-2xl max-w-xs mx-auto overflow-hidden bg-[#135D66] rounded-lg shadow-lg dark:bg-gray-800 p-2">
         <div className="p-2 h-96 sm:w-1/2">
           <img
             className="rounded object-cover w-full sm:h-full h-full"

@@ -16,7 +16,7 @@ import axios from "axios";
 
 const Login = () => {
   const { register, formState: { errors }, handleSubmit } = useForm()
-  const {userSignIn, googleLogin} = useContext(AuthContext)
+  const {userSignIn, googleLogin, githubLogin} = useContext(AuthContext)
   const navigate = useNavigate()
   const location = useLocation()
   
@@ -43,6 +43,23 @@ const Login = () => {
   const handleGoogleSignIn = async () => {
     try {
       const result = await googleLogin()
+      await axios.post(
+        'https://studysquadron-server.vercel.app/jwt',
+        {
+          email: result?.user?.email,
+        },
+        { withCredentials: true }
+      )
+      toast.success('Signin Successful')
+      navigate(location?.state || '/')
+    } catch (err) {
+      toast.error(err?.message)
+    }
+  }
+
+  const handleGithubSignIn = async () => {
+    try {
+      const result = await githubLogin()
       await axios.post(
         'https://studysquadron-server.vercel.app/jwt',
         {
@@ -110,7 +127,7 @@ const Login = () => {
                   className="border-none outline-none">
                   <BsGoogle className="text-3xl text-[#77B0AA]"></BsGoogle>
                 </button>
-                <button type="button"
+                <button onClick={handleGithubSignIn} type="button"
                   className="border-none outline-none">
                   <FaGithub  className="text-3xl text-[#77B0AA]"></FaGithub>
                 </button>
