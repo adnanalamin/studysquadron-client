@@ -42,7 +42,11 @@ const PendingAssignment = () => {
 
     const status = "completed";
     const id = fileUrl._id;
-    console.log(id);
+
+    if (Number(number) >= Number(fileUrl.assignmentMarks) + 1) {
+      toast.error("Marks not match");
+      return;
+    }
 
     if (!number || !assignmentFeedback) {
       toast.error("Please provide both number and feedback.");
@@ -158,17 +162,6 @@ const PendingAssignment = () => {
                     <div className="w-full">
                       <p className="font-semibold text-sm block overflow-hidden whitespace-pre-wrap ">
                         {fileUrl.assignmentnote}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div className="bg-[#E3FEF7]  rounded-lg mb-6 px-4 py-4">
-                  <div className="w-4/5 h-auto">
-                    <h1 className="font-bold text-lg">Note:</h1>
-
-                    <div className="w-full">
-                      <p className="font-semibold text-sm block overflow-hidden whitespace-pre-wrap ">
-                        {fileUrl.userName}
                       </p>
                     </div>
                   </div>
