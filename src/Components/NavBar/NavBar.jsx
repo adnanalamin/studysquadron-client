@@ -124,6 +124,7 @@ const NavBar = () => {
             <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-[#003C43] rounded-box w-52">
               
               <li><Link to='/AttemptedAssignments'>Attempted Assignments</Link></li>
+              <li><Link to='/profile'>Profile</Link></li>
               <li><a onClick={handelLogout}>Logout</a></li>
             </ul>
           </div>

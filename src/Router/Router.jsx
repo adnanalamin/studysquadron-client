@@ -11,6 +11,7 @@ import PendingAssignment from "../Pages/PendingAssignment/PendingAssignment";
 import UpdateAssignment from "../Pages/UpdateAssignment/UpdateAssignment";
 import AssignmentDetails from "../Pages/AssignmentDetails/AssignmentDetails";
 import AttemptedAssignments from "../Pages/AttemptedAssignments/AttemptedAssignments";
+import Profile from "../Pages/Profile/Profile";
 
 const router = createBrowserRouter([
   {
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
       {
         path: '/AttemptedAssignments',
         element: <PrivetRouter><AttemptedAssignments></AttemptedAssignments></PrivetRouter>
+      },
+      {
+        path: '/profile',
+        element: <PrivetRouter><Profile></Profile></PrivetRouter>
       }
     ],
   },
